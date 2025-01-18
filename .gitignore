@@ -1,9 +1,4 @@
-
-/node_modules/
-/vendor/
-package-lock.json
-composer.lock
-/config/config.php
-.DS_Store
-
-
+/js
+/css
+/img
+!.gitignore
