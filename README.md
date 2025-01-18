@@ -7,7 +7,7 @@
 [Lucky Draw](https://apan1121.github.io/luckydraw/)  
 [Demo 影片](https://www.youtube.com/watch?v=Vp7fli021d8)
 
----
+
 > 考特於 2025 年 1 月中收到神秘協助請求，於是以最小變動幅度為原則，讓此抽獎服務能夠再次偉大。
 
 ## 目錄
@@ -24,7 +24,7 @@
 4. [注意事項](#注意事項)
 5. [套件更新](#套件更新)
 
----
+
 # 測試環境
 此抽獎服務在以下環境中測試並確認可正常運行：
 
@@ -46,7 +46,7 @@ npm -v
 yarn -v
 1.22.22
 ```
----
+
 
 # 本地運行
 
@@ -80,7 +80,7 @@ serve . -l 8080
 
 應用程式將會在 [http://localhost:8080](http://localhost:8080) 提供服務。
 
----
+
 
 # 使用 Docker 運行
 
@@ -102,12 +102,12 @@ docker run -d -p 8080:8080 luckydraw:latest
 ## 存取應用程式
 應用程式將會在本機的 [http://localhost:8080](http://localhost:8080) 提供服務。
 
----
+
 
 # 注意事項
 1. `docker rmi $(docker images -f "dangling=true" -q)`
 
----
+
 
 # 套件更新
 
