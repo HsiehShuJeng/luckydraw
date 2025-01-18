@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import { mapActions, mapGetters } from 'vuex';
+import { mapGetters } from 'vuex';
 
 
 import { createStore } from 'lib/store/index';

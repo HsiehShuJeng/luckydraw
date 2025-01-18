@@ -77,7 +77,9 @@ export default {
     watch: {
     },
     created(){},
-    mounted(){},
+    mounted() {
+        console.log("Config:", this.config);
+    },
     updated(){},
     destroyed(){},
     methods: {
