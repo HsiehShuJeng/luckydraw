@@ -26,6 +26,7 @@ jobs:
 
       - name: Prepare deployment files
         run: |
+          rm -f dist/.gitignore
           mkdir intermediate
           cp index.html intermediate/
           cp -r dist intermediate/
