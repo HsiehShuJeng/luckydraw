@@ -106,6 +106,6 @@ export default {
 
 <style scoped>
 .candidate-wrapper{
-    margin: 10px auto;
+    margin: 10px auto; /* Match the margin style */
 }
 </style>

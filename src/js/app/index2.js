@@ -1,9 +1,9 @@
 import Vue from 'vue';
-import { mapActions, mapGetters } from 'vuex';
+import { mapGetters } from 'vuex';
 
-import {createStore} from 'lib/store/index';
+import { createStore } from 'lib/store/index';
 
-import {history_route, string, mixpanel} from 'lib/common/util';
+import { mixpanel } from 'lib/common/util';
 
 import headerBarBox from './components/common/headerBarBox';
 import candidateBox from './components/common/candidateBox';
@@ -27,21 +27,21 @@ let saveToLocalStorageTimer = null;
 
 var Page = new Vue({
     el: '#appBox',
-    data: function() {
+    data: function () {
         return {
             popstats: false,
         }
     },
     methods: {
-        init: function(){
+        init: function () {
             const that = this;
             mixpanel.track("init page");
             that.$store.dispatch("initSystem");
         },
-        saveToLocalStorage: function(){
+        saveToLocalStorage: function () {
             const that = this;
             clearTimeout(saveToLocalStorageTimer);
-            saveToLocalStorageTimer = setTimeout(function(){
+            saveToLocalStorageTimer = setTimeout(function () {
                 that.$store.dispatch("saveToLocalStorage");
             }, 500);
         },

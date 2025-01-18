@@ -3,10 +3,8 @@ const WebpackBar = require('webpackbar');
 const merge = require('webpack-merge');
 const path = require('path');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin'); // This is the correct plugin now
+// const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const argv = require('yargs-parser')(process.argv.slice(2));
 
@@ -17,15 +15,13 @@ const mergeConfig = isDev ? require('./webpack/webpack.config.dev') : require('.
 
 const file_entry = require('./webpack/webpack.config.entry');
 
-
 const APP_DIR = path.resolve(__dirname, 'src/js');
 const BUILD_DIR = path.resolve(__dirname, 'dist/js/');
-const ASSETS_PATH = path.resolve(__dirname, 'dist/assets/');
-
+// const ASSETS_PATH = path.resolve(__dirname, 'dist/assets/');
 
 const jsConfig = {
     mode,
-    devtool: isDev ? 'cheap-eval-source-map' : '',
+    devtool: isDev ? 'cheap-eval-source-map' : 'source-map',
     context: APP_DIR,
     entry: {
         ...file_entry.js,
@@ -33,7 +29,6 @@ const jsConfig = {
     output: {
         filename: '[name].bundle.js',
         path: BUILD_DIR,
-
         publicPath: 'dist/js/',
         chunkFilename: '[name].bundle.js?v=[chunkhash]',
     },
@@ -47,6 +42,7 @@ const jsConfig = {
         },
         extensions: ['.vue', '.jsx', '.js', '.json'],
     },
+    target: 'web', // Ensure target is set to 'web' for browser environments
     module: {
         rules: [{
             test: /\.(js|jsx)$/,
@@ -61,16 +57,17 @@ const jsConfig = {
         {
             test: /\.css$/,
             use: [
-                'vue-style-loader',
+                MiniCssExtractPlugin.loader,  // Use MiniCssExtractPlugin for CSS extraction
                 'css-loader',
             ],
         },
         ],
     },
     plugins: [
-    // // make sure to include the plugin!
         new VueLoaderPlugin(),
-        new ExtractTextPlugin('../css/[name].css'),
+        new MiniCssExtractPlugin({
+            filename: '../css/[name].css', // Output file for extracted CSS
+        }),
         new webpack.ProvidePlugin({
             $: 'jquery',
             jQuery: 'jquery',
@@ -78,9 +75,6 @@ const jsConfig = {
             'window.jQuery': 'jquery',
             moment: 'moment',
         }),
-        /*
-            https://github.com/nuxt/webpackbar
-         */
         new WebpackBar({
             name: ' ------ JS Bundle ------ ',
             color: '#f79420',
@@ -95,7 +89,6 @@ const jsConfig = {
                     name: 'chunk/node_modules',
                     chunks: 'all',
                     minSize: 10,
-                    // minChunks: 1
                 },
                 vendor: {
                     test: /[\\/]js[\\/]vendor[\\/]/,
@@ -109,9 +102,7 @@ const jsConfig = {
             },
         },
     },
-
 };
-
 
 let cssConfig = {
     mode,
@@ -128,14 +119,14 @@ let cssConfig = {
             {
                 test: /\.css$/,
                 use: [
-                    MiniCssExtractPlugin.loader,
+                    MiniCssExtractPlugin.loader, // Use MiniCssExtractPlugin for CSS extraction
                     'css-loader',
                 ],
             },
             {
                 test: /\.(sa|sc)ss$/,
                 use: [
-                    MiniCssExtractPlugin.loader, // Extract CSS to separate files
+                    MiniCssExtractPlugin.loader,  // Extract CSS to separate files
                     {
                         loader: 'css-loader',
                         options: {
@@ -159,7 +150,6 @@ let cssConfig = {
     ],
 };
 
-
 if (mode === 'production') {
     cssConfig = {
         ...cssConfig,
@@ -171,13 +161,9 @@ if (mode === 'production') {
     };
 }
 
-
-
-
 const baseConfig = {
     jsConfig,
     cssConfig,
 };
 
 module.exports = merge.multiple(baseConfig, mergeConfig);
-
