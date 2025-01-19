@@ -184,12 +184,11 @@
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                <h4>贊助一杯咖啡</h4>
+                                <h4>喝杯咖啡清神下</h4>
                             </div>
                             <div class="col-12">
-                                <a href="https://www.buymeacoffee.com/apan1121" target="_blank" @click="donateAct">
-                                    <div class="donate-image">
-                                        <img width="100%" :src="'./dist/img/buymeacoffee.jpeg'">
+                                <a href="https://medium.com/@fantasticsie" target="_blank" @click="donateAct">
+                                    <div class="donate-image" :style="{ backgroundImage: `url(${randomBackgroundImage})` }">
                                     </div>
                                 </a>
                             </div>
@@ -240,7 +239,7 @@ export default {
     },
     filters: {},
     props: {},
-    data(){
+    data() {
         return {
             input: {
                 webTitle: '',
@@ -283,6 +282,12 @@ export default {
                 'fas fa-dice-six',
             ],
             diceFocus: 2,
+            backgroundImages: [
+                './dist/img/innovation.jpeg',
+                './dist/img/innovation2.jpeg',
+                './dist/img/innovation3.jpeg',
+                './dist/img/innovation4.jpeg',
+            ],
         };
     },
     computed: {
@@ -350,6 +355,12 @@ export default {
             setConfig: 'setConfig',
             clearAllData: 'clearAllData',
         }),
+        randomBackgroundImage() {
+            const randomIndex = Math.floor(Math.random() * this.backgroundImages.length);
+            const imagePath = this.backgroundImages[randomIndex];
+            console.log('Selected background image:', imagePath); // Debugging
+            return imagePath;
+        },
         clear(){
             const that = this;
             popup.warning({
