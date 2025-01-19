@@ -60,14 +60,7 @@ const jsConfig = {
                 MiniCssExtractPlugin.loader,  // Use MiniCssExtractPlugin for CSS extraction
                 'css-loader',
             ],
-        },
-        {
-            test: /\.(png|jpe?g|gif|svg)$/i,
-            type: 'asset/resource',
-            generator: {
-                filename: '../img/[name][ext]', // Output images to the `dist/img` folder
-            },
-        },
+        }
         ],
     },
     plugins: [
