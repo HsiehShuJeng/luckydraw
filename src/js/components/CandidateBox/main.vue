@@ -78,7 +78,6 @@ export default {
     },
     created(){},
     mounted() {
-        console.log("Config:", this.config);
     },
     updated(){},
     destroyed(){},

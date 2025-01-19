@@ -60,7 +60,7 @@ const jsConfig = {
                 MiniCssExtractPlugin.loader,  // Use MiniCssExtractPlugin for CSS extraction
                 'css-loader',
             ],
-        },
+        }
         ],
     },
     plugins: [
