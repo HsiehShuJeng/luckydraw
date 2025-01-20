@@ -11,6 +11,20 @@
                 </div>
                 <div class="modal-body">
                     <form>
+                        <div class="row">
+                            <div class="col-12">
+                                <h4>喝杯咖啡清神下</h4>
+                            </div>
+                            <div class="col-12">
+                                <a href="https://medium.com/@fantasticsie" target="_blank" @click="donateAct">
+                                    <div class="donate-image"
+                                        style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden;">
+                                        <img :src="randomImageSrc" alt="Random Image"
+                                            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; object-position: top;">
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
                         <div class="form-group">
                             <label for="webTitle">網站標題</label>
                             <input v-model="input.webTitle" type="text" class="form-control" name="webTitle"
@@ -136,18 +150,6 @@
                             <input v-model.number="input.defaultRunTime" type="range" class="form-control" min="10"
                                 max="100">
                         </div>
-                        <div class="row">
-                            <div class="col-12">
-                                <h4>喝杯咖啡清神下</h4>
-                            </div>
-                            <div class="col-12">
-                                <a href="https://medium.com/@fantasticsie" target="_blank" @click="donateAct">
-                                    <div class="donate-image">
-                                        <img width="100%" :src="randomImageSrc" alt="Random Image">
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -176,7 +178,6 @@ import { popup, string, trackJS } from 'lib/common/util';
 
 export default {
     components: {
-        GoogleSupport: () => import('components/GoogleSupport/main.vue'),
     },
     data() {
         return {
@@ -226,7 +227,11 @@ export default {
                 './dist/img/innovation2.jpeg',
                 './dist/img/innovation3.jpeg',
                 './dist/img/innovation4.jpeg',
+                './dist/img/innovation5.jpeg',
+                './dist/img/innovation6.jpeg',
+                './dist/img/innovation7.jpeg',
             ],
+            randomImageSrc: '',
         };
     },
     computed: {
@@ -275,6 +280,7 @@ export default {
             const config = JSON.parse(JSON.stringify(that.config));
             that.input = { ...that.input, ...config };
             that.orgInput = { ...that.orgInput, ...config };
+            that.generateRandomImage();
 
             trackJS.mixpanel('SettingOpen_click');
             trackJS.gtag('event', 'SettingOpen_click');
@@ -339,6 +345,10 @@ export default {
         donateAct() {
             trackJS.gtag('event', 'donate_click', {});
             trackJS.mixpanel('donate_click', {});
+        },
+        generateRandomImage() {
+            const randomIndex = Math.floor(Math.random() * this.backgroundImages.length);
+            this.randomImageSrc = this.backgroundImages[randomIndex];
         },
     },
 };
