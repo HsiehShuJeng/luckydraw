@@ -230,6 +230,9 @@ export default {
                 './dist/img/innovation5.jpeg',
                 './dist/img/innovation6.jpeg',
                 './dist/img/innovation7.jpeg',
+                './dist/img/innovation8.jpeg',
+                './dist/img/innovation9.jpeg',
+                './dist/img/innovation10.jpeg',
             ],
             randomImageSrc: '',
         };
